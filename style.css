@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.calculator {
+    border: 1px solid #000;
+    border-radius: 15px;
+    
+    width: 350px;
+}
+
+.calculator .calculator-display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+
+    gap: 5px;
+
+    border-bottom: 1px solid #000;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    padding: 30px ;
+}
+
+.calculator .calculator-display .calculator-operation {
+    display: inline-flex;
+    gap: 2px;
+}
+
+.calculator .calculator-display .calculator-operation .calculator-num1 {
+
+}
+
+.calculator .calculator-display .calculator-operation .calculator-num2 {
+
+}
+
+.calculator .calculator-display .calculator-operation .calculator-operator {
+
+}
+
+.calculator .calculator-body {
+    padding: 15px;
+}
+
+.calculator .calculator-body .calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+    grid-gap: 5px;
+}
+
+.calculator .calculator-body .calculator-buttons .calculator-button {
+    border: 1px solid #000;
+    border-radius: 5px;
+
+    aspect-ratio: 1/1;
+
+    cursor: pointer;
+}
+
+.calculator .calculator-body .calculator-buttons .calculator-button.equal {
+    grid-row: span 2;
+    aspect-ratio: auto;
+}
+
