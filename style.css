@@ -36,19 +36,18 @@ body {
 
 .calculator .calculator-display .calculator-operation {
     display: inline-flex;
-    gap: 2px;
+    justify-content: center;
+    align-items: center;
+    height:25px;
+    font-size: 25px;
+    gap: 5px;
 }
 
-.calculator .calculator-display .calculator-operation .calculator-num1 {
-
-}
-
-.calculator .calculator-display .calculator-operation .calculator-num2 {
-
-}
-
-.calculator .calculator-display .calculator-operation .calculator-operator {
-
+.calculator .calculator-display .calculator-operation-result {
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-size: 50px;
 }
 
 .calculator .calculator-body {
