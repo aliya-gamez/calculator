@@ -79,6 +79,10 @@ buttons.forEach((button) => {
                 num2 = '';
                 operator=value;
             }
+            else if(num1==''&&num2==''&&operator=='') {
+                num1 = result;
+                operator=value;
+            }
         }
         else if(type=='calculate'){
             if(num1!==''&&num2!==''&&operator!==''){
