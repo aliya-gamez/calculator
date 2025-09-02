@@ -29,41 +29,7 @@ function operate(operator,num1,num2) {
     if(operator=='divide') {result = divideCalc(a,b);} //divide
     if(operator=='modulus') {result = modulusCalc(a,b);} //modulus
     result = parseFloat(result.toFixed(4));
-    if(result!=='') {
-        populateDisplay('result',result);
-    }
     return result;
-}
-
-function populateDisplay(type,value) {
-    if(type=='digit') {
-        if(num2==''&&operator=='') {
-            num1 += value;
-            calcNum1.textContent += value;
-        }
-        else if(operator!='') {
-            num2 += value;
-            calcNum2.textContent += value;
-        }
-    }
-    else if(type=='operator'){
-        let symbol = convertToIcon(value);
-        if(num1!=''&&num2==''){
-            operator = value;
-            calcOperator.textContent = symbol;
-        }
-        else if(num1!=''&&num2!=''&&operator!='') {
-            console.log(num1,operator,num2);
-            num1 = operate(operator,num1,num2);
-            num2 = '';
-            operator=value;
-            calcOperator.textContent = symbol;
-            calcNum2.textContent = ''
-        }
-    }
-    else if(type=='result') {
-        calcResult.textContent = result;
-    }
 }
 
 function convertToIcon(value) {
@@ -72,6 +38,13 @@ function convertToIcon(value) {
     if(value=='multiply') {return '×'} //multiply
     if(value=='divide') {return '÷'} //divide
     if(value=='modulus') {return '%'} //modulus
+}
+
+function populateDisplay() {
+    calcNum1.textContent = num1;
+    calcNum2.textContent = num2;
+    calcOperator.textContent = convertToIcon(operator);
+    calcResult.textContent = result !== '' ? result : '';
 }
 
 // Event Listeners: Buttons on Calculator
@@ -84,21 +57,56 @@ buttons.forEach((button) => {
 
         // Conditionals to point where each button goes into
         if(type=='digit'){
-            populateDisplay(type,value);
+            if(num2==''&&operator=='') {
+                if(value=='.'&&num1.includes('.')){
+                    return;
+                }
+                num1 += value;
+            }
+            else if(operator!='') {
+                if(value=='.'&&num2.includes('.')){
+                    return;
+                }
+                num2 += value;
+            }
         }
         else if(type=='operator'){
-            populateDisplay(type,value);
+            if(num1!=''&&num2==''){
+                operator = value;
+            }
+            else if(num1!=''&&num2!=''&&operator!='') {
+                num1 = operate(operator,num1,num2);
+                num2 = '';
+                operator=value;
+            }
         }
         else if(type=='calculate'){
-            if(num1!=''&&num2!=''&&operator!='') {
-                operate(operator,num1,num2);
+            if(num1!==''&&num2!==''&&operator!==''){
+                result = operate(operator, num1, num2);
+                num1 = '';
+                num2 = '';
+                operator = '';
             }
         }
         else if(type=='clear'){
-
+            let tempArr = [];
+            if(num2==''&&operator=='') {
+                tempArr = num1.split('');
+                tempArr.pop();
+                num1 = tempArr.join('');
+            }
+            else if(operator!='') {
+                tempArr = num2.split('');
+                tempArr.pop();
+                num2 = tempArr.join('');
+            }
         }
         else if(type=='all-clear'){
-
+            num1 = '';
+            num2 = '';
+            operator = '';
+            result = '';
         }
+        populateDisplay();
     });
 });
